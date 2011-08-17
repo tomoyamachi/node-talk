@@ -1,9 +1,26 @@
 mongoose = require 'mongoose'
 mongoose.connect 'mongodb://localhost/talk_db'
+mongoTypes = require('mongoose-types')
+
+required = (val) ->
+  val and val.length
+mongoTypes.loadTypes mongoose, "email"
 
 user_scheme = new mongoose.Schema(
-  name:String
-  )
+  email:
+    type: mongoose.SchemaTypes.Email
+    validate: [ required, "Email is required" ]
+#    index: unique: true
+
+  password:
+    type: String
+    validate: [ required, "Password is required" ]
+    match: /[A-Za-z0-9]{12}\$[0-9a-f]{32}/
+
+  created_at:
+    type: Date
+    default: Date.now
+)
 
 title_scheme = new mongoose.Schema(
   created_at:Date,
@@ -19,6 +36,7 @@ title_scheme.virtual("user").get(->
 voice_scheme = new mongoose.Schema(
   contents:String
   title_id:mongoose.Schema.ObjectId
+  created_at:Date
 )
 voice_scheme.virtual("title").get(->
   this["titleobj"]
@@ -32,9 +50,23 @@ Voice = mongoose.model 'Voice', voice_scheme
 exports.createConnection = (url)->
   mongoose.createConnection(url)
 
-# item = new User()
-# item.name = "Username"
-# item.save (e) -> console.log 'add user: ' + JSON.stringify(item)
+item = new User()
+item.email = "username"
+item.password = "pass"
+item.save (e) -> console.log 'add user: ' + JSON.stringify(item)
+i =
+  name:"Username"
+
+User.findOne i, (err, users) ->
+  console.log users
+  console.log "foundOne"
+
+
+
+#User.where('email', 'username').findOne doc->
+ # console.log doc
+
+
 # title = new Title()
 # title.voice = "Article title"
 # title.created_at = new Date

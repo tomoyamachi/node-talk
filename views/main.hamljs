@@ -1,0 +1,23 @@
+%header
+  .container_12
+    %a.logo{href:"#top"} TALK
+    = message
+    .prefix_3.suffix3.grid_6
+      %form{method:"GET",action: action}
+        %textarea{rows:3,cols:50,name:"voice",id:"voice"}
+        %input{type:"submit"}
+.container_12
+  .prefix_3.suffix3.grid_6
+    .active-voice
+      %p どうやらtextareaやinputをlabelで囲ってやると回避出来る模様（この場合、両方にwidth指定が必要。ただしマークアップによっては、labelで囲む書き方は出来ません)。
+      .active-arrow
+    - each v in voices
+      .voice
+        %p= v.contents
+        .partner-arrow
+    .voice
+      %p どうやらtextareaやinputをlabelで囲ってやると回避出来る模様（この場合、両方にwidth指定が必要。ただしマークアップによっては、labelで囲む書き方は出来ません)。
+      .partner-arrow
+    .voice
+      .my-arrow
+      %p どうやらtextareaやinputをlabelで囲ってやると回避出来る模様（この場合、両方にwidth指定が必要。ただしマークアップによっては、labelで囲む書き方は出来ません)。

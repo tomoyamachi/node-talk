@@ -1,5 +1,5 @@
 (function() {
-  var Title, User, app, db, express, mongoModel;
+  var Title, User, Voice, app, db, express, mongoModel;
   express = require("express");
   app = module.exports = express.createServer();
   app.configure(function() {
@@ -19,6 +19,7 @@
   db = mongoModel.createConnection('mongodb://localhost/talk_db');
   User = db.model("User");
   Title = db.model("Title");
+  Voice = db.model("Voice");
   app.configure("development", function() {
     return app.use(express.errorHandler({
       dumpExceptions: true,
@@ -29,13 +30,70 @@
     return app.use(express.errorHandler());
   });
   app.get("/", function(req, res) {
-    return Title.find().desc('created_at').find(function(err, titles) {
-      return res.render("index", {
-        title: "Express",
+    return res.render("index", {
+      action: "/login",
+      message: ""
+    });
+  });
+  app.get("/main", function(req, res) {
+    return Voice.find().desc('created_at').find(function(err, voices) {
+      return res.render("main", {
         action: "/post",
-        titles: titles
+        voices: voices
       });
     });
+  });
+  app.get("/login", function(req, res) {
+    var create_new, email, i, password, res_error, res_success, user;
+    res_error = function(mes) {
+      return res.render("index", {
+        action: "/login",
+        message: mes
+      });
+    };
+    res_success = function(mes) {
+      return res.render("index", {
+        message: mes
+      });
+    };
+    email = req.query.email;
+    password = req.query.password;
+    create_new = req.query["new"];
+    if (!email) {
+      res_error("not found email");
+    }
+    if (!password) {
+      res_error("not found \"password\"");
+    }
+    user = new User();
+    i = {
+      email: email,
+      password: password
+    };
+    if (create_new) {
+      User.where("fb.gender", "male").findOne(doc);
+      return User.findOne(i, function(doc) {
+        console.log(doc);
+        if (doc == null) {
+          user.email = email;
+          user.password = password;
+          user.save();
+          return res_success("you get account.");
+        } else {
+          return res_error("this accout is already gotten");
+        }
+      });
+    } else {
+      return User.findOne(i, function(doc) {
+        console.log(doc);
+        console.log("findOne method");
+        if (doc == null) {
+          return res_error("UserID or passwrod is different.");
+        } else {
+          return res_success("login success.");
+        }
+      });
+    }
   });
   app.get('/post', function(req, res) {
     var item;
@@ -43,8 +101,8 @@
       res.send("not enough post data");
       return;
     }
-    item = new Title();
-    item.voice = req.query.voice;
+    item = new Voice();
+    item.contents = req.query.voice;
     item.created_at = new Date;
     item.save(function(err) {
       if (!err) {
