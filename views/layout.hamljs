@@ -1,0 +1,12 @@
+!!! XML
+!!!
+%html{lang:"en"}
+  %head
+    %meta{content:"IE=edge,chrome=1"}
+      %title Talk
+      %link{href:"stylesheets/talk.css",media:"all",rel:"stylesheet",type:"text/css"}
+      %link{href:"stylesheets/960.css",media:"all", rel:"stylesheet",type:"text/css"}
+      %script{src:"stylesheets/jquery.js", type:"text/javascript"}
+    %title Talk
+  %body.home#top
+    != body

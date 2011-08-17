@@ -1,0 +1,174 @@
+/*
+Theme Name: ffde00
+Theme URI: http://contrast.ie/blog
+Description: Minimal Theme
+Author: Contrast
+Author url: http://contrast.ie
+Version: 1.0
+Tags: clean
+*/
+
+/**
+ * HTML5 Boilerplate
+ *
+ * style.css contains a reset, font normalization and some base styles.
+ *
+ * Credit is left where credit is due.
+ * Much inspiration was taken from these projects:
+ * - yui.yahooapis.com/2.8.1/build/base/base.css
+ * - camendesign.com/design/
+ * - praegnanz.de/weblog/htmlcssjs-kickstart
+ */
+
+
+/**
+ * html5doctor.com Reset Stylesheet (Eric Meyer's Reset Reloaded + HTML5 baseline)
+ * v1.6.1 2010-09-17 | Authors: Eric Meyer & Richard Clark
+ * html5doctor.com/html-5-reset-stylesheet/
+ */
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+blockquote, q { quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after { content: ''; content: none; }
+
+ins { background-color: #ff9; color: #000; text-decoration: none; }
+
+mark { background-color: #ff9; color: #000; font-style: italic; font-weight: bold; }
+
+del { text-decoration: line-through; }
+
+abbr[title], dfn[title] { border-bottom: 1px dotted; cursor: help; }
+
+table { border-collapse: collapse; border-spacing: 0; }
+
+hr { display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0; }
+
+input, select { vertical-align: middle; }
+
+/* Font normalization inspired by YUI Library's fonts.css: developer.yahoo.com/yui/
+
+/* Normalize monospace sizing:
+/*   en.wikipedia.org/wiki/MediaWiki_talk:Common.css/Archive_11#Teletype_style_fix_for_Chrome
+pre, code, kbd, samp { font-family: monospace, sans-serif; }
+
+
+/* Minimal base styles.
+
+  body { font-family: Helvetica, Meiryo, "メイリオ", "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", verdana,arial, "lucida grande", sans-serif;font-size: 13px;}
+select, input, textarea, button { font:99% sans-serif; }
+
+/* Headers (h1, h2, etc) have no default font-size or margin; define those yourself */
+h1, h2, h3, h4, h5, h6 { font-weight: bold; }
+
+a, a:active, a:visited { color: #000; }
+a:hover { color: #000; }
+
+$pink:#FD0CB6;
+a:hover {
+	text-decoration: none;
+}
+
+body>header {
+	height: 300px;
+	background: $pink;
+    border-bottom: 8px white double;
+}
+a.logo {
+  font-family: Helvetica, Meiryo, "メイリオ", "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", verdana,arial, "lucida grande", sans-serif;
+	display: block;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  font-size: 150px;
+  letter-spacing: 18px;
+	width: 960px;
+	height: 180px;
+	margin: 0px auto;
+	position: relative;
+	top: 10px;
+}
+.top-body {margin-top: 120px;}
+.body {margin-top: 280px;}
+.box,.blankBox {width:217px;height:217px;border: 3px #ddd double;cursor: pointer;
+    .upper{padding:60px 0;}
+    .downer{padding:90px 0;}
+  h2{text-align: center;font-weight: bold;font-size: 40px;
+    }
+  }
+$purple: #A40CFC;
+$yellow: #F0FC0C;
+$sky: #0CECFC;
+$green: #20FC0C;
+.purple {&:hover{background: $purple;border: 3px $purple double;}}
+.yellow {&:hover{background: $yellow;border: 3px $yellow double;}}
+.sky {&:hover{background: $sky;border: 3px $sky double;}}
+.green {background: $green;}
+textarea {margin:10px;width:470px;}
+input {padding:10px;margin-left:10px;width:480px;}
+
+
+$voice-color:#e3e3e3;
+@mixin voice($color) {
+  width: 450px;
+  background: $color;
+  padding: 25px;
+  position: relative;
+  line-height: 20px;
+  margin:10px;
+}
+.voice{
+  @include voice($voice-color);
+  }
+.active-voice{
+  @include voice($yellow);
+  }
+
+@mixin arrow($color){
+  width: 0;
+  height: 0;
+  line-height: 0px;
+  border-top: 50px solid $color;
+  position: absolute;
+  bottom: 20%;
+  }
+.my-arrow{
+    @include arrow($voice-color);
+    border-right: none;
+    border-left: 30px solid white;
+    left: -30px;
+  }
+.partner-arrow {
+    @include arrow($voice-color);
+    border-left: none;
+    border-right: 30px solid white;
+    right: -30px;
+}
+.active-arrow{
+    @include arrow($yellow);
+    border-left: none;
+    border-right: 30px solid white;
+    right: -30px;
+  }
