@@ -43,9 +43,8 @@ app.get "/login", (req, res) ->
     res.render "index", action: "/login", message: mes
 
   res_success = (mes) ->
-    res.render "index", message: mes
-#    Voice.find().desc('created_at').find (err,voices)->
- #     res.render "main", action: "/post", voices: voices, message: mes
+    Voice.find().desc('created_at').find (err,voices)->
+      res.render "main", action: "/post", voices: voices, message: mes
 
   email = req.query.email
   password = req.query.password
@@ -58,8 +57,7 @@ app.get "/login", (req, res) ->
     password: password
 
   if create_new
-    User.where("fb.gender", "male").findOne (doc)
-    User.findOne i, (doc) ->
+    User.findOne i, (err,doc)->
       console.log doc
       unless doc?
         user.email = email
@@ -69,7 +67,7 @@ app.get "/login", (req, res) ->
       else
         res_error "this accout is already gotten"
   else
-    User.findOne i, (doc) ->
+    User.findOne i, (err,doc)->
       console.log doc
       console.log "findOne method"
       unless doc?

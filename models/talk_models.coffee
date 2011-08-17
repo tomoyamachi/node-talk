@@ -8,14 +8,14 @@ mongoTypes.loadTypes mongoose, "email"
 
 user_scheme = new mongoose.Schema(
   email:
-    type: mongoose.SchemaTypes.Email
+    type: String#mongoose.SchemaTypes.Email
     validate: [ required, "Email is required" ]
 #    index: unique: true
 
   password:
     type: String
-    validate: [ required, "Password is required" ]
-    match: /[A-Za-z0-9]{12}\$[0-9a-f]{32}/
+#    validate: [ required, "Password is required" ]
+#    match: /[A-Za-z0-9]{12}\$[0-9a-f]{32}/
 
   created_at:
     type: Date
@@ -50,21 +50,18 @@ Voice = mongoose.model 'Voice', voice_scheme
 exports.createConnection = (url)->
   mongoose.createConnection(url)
 
-item = new User()
-item.email = "username"
-item.password = "pass"
-item.save (e) -> console.log 'add user: ' + JSON.stringify(item)
-i =
-  name:"Username"
-
-User.findOne i, (err, users) ->
-  console.log users
-  console.log "foundOne"
+# item = new User()
+# item.email = "username"
+# item.password = "pass"
+# item.save (e) -> console.log 'add user: ' + JSON.stringify(item)
+# i =
+#   name:"Username"
 
 
-
-#User.where('email', 'username').findOne doc->
- # console.log doc
+########findOne method############
+# User.findOne i, (err, users) ->
+#   console.log users
+#   console.log "foundOne"
 
 
 # title = new Title()

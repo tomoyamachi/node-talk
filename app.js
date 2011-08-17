@@ -52,8 +52,12 @@
       });
     };
     res_success = function(mes) {
-      return res.render("index", {
-        message: mes
+      return Voice.find().desc('created_at').find(function(err, voices) {
+        return res.render("main", {
+          action: "/post",
+          voices: voices,
+          message: mes
+        });
       });
     };
     email = req.query.email;
@@ -71,8 +75,7 @@
       password: password
     };
     if (create_new) {
-      User.where("fb.gender", "male").findOne(doc);
-      return User.findOne(i, function(doc) {
+      return User.findOne(i, function(err, doc) {
         console.log(doc);
         if (doc == null) {
           user.email = email;
@@ -84,7 +87,7 @@
         }
       });
     } else {
-      return User.findOne(i, function(doc) {
+      return User.findOne(i, function(err, doc) {
         console.log(doc);
         console.log("findOne method");
         if (doc == null) {
